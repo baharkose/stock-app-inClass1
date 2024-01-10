@@ -54,7 +54,7 @@ const MenuListItems = () => {
         "&:hover .MuiSvgIcon-root":{color:"red"},
         "& .MuiSvgIcon-root":{color:"white"}
 
-        // - nested seçim nested ile iconu beyaz yaptık. svglerin kırmızı olması için yine nested yapı ile yapıldı.
+        // - nested seçim nested ile iconu beyaz yaptık. svglerin kırmızı olması için yine nested yapı ile yapıldı. Class seviyesine inip stillendirme işlemi yapmaç
         }} key={index} disablePadding onClick={() => navigate(item.url)}>
           <ListItemButton>
             <ListItemIcon sx={{"color":"white","&:hover":{color:"red"}}}>{item.icon}</ListItemIcon>
