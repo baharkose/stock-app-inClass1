@@ -4,6 +4,7 @@ import { grey, blueGrey } from "@mui/material/colors"
 import { Provider } from "react-redux"
 import store, { persistor } from "./app/store"
 import { ToastContainer } from "react-toastify"
+// persist gate import edildi.
 import { PersistGate } from "redux-persist/integration/react"
 import storage from 'redux-persist/lib/storage/session'
 
@@ -23,6 +24,7 @@ function App() {
     {/* aslında özel verilerin bu şekilde saklanması sakıncalı. http only cookie js erişemiyor sadece sadece protokol erişebilir. */}
       <ThemeProvider theme={theme}>
         <Provider store={store}>
+          {/* 3- persistor ile sarmalama işlemi yaptık. */}
           <PersistGate loading={null} persistor={persistor}>
             <AppRouter />
           </PersistGate>

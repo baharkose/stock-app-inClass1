@@ -65,7 +65,7 @@ const MenuListItems = () => {
         >
           <ListItemButton>
             {/* ikonlar yalnızca ilgili bulundukları alanda stillendi. mutlaka svgnin kendi bileşeninden stillendirme yapılmalıdır. */}
-            <ListItemIcon sx={{ color: "white", "&:hover": { color: "red" } }}>
+            <ListItemIcon>
               {item.icon}
             </ListItemIcon>
             <ListItemText primary={item.title} />
