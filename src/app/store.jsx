@@ -1,5 +1,6 @@
-import { configureStore } from "@reduxjs/toolkit";
-import authReducer from "../features/authSlice";
+import { configureStore } from "@reduxjs/toolkit"
+import authReducer from "../features/authSlice"
+import stockReducer from "../features/stockSlice"
 import {
   persistStore,
   persistReducer,
@@ -9,27 +10,20 @@ import {
   PERSIST,
   PURGE,
   REGISTER,
-} from "redux-persist";
-
-import storage from "redux-persist/lib/storage";
-// import storage from "redux-persist/lib/storage";
-// üstteki lokal storage hali
-// buraya session eklersek o zaman session storage kullanır.
-// defaults to localStorage for web
-import stockReducer from "../features/stockSlice";
+} from "redux-persist"
+// import storage from "redux-persist/lib/storage" //? local storage
+import storage from "redux-persist/lib/storage/session" //? session storage
 
 const persistConfig = {
   key: "root",
   storage,
-};
+}
 
-const persistedReducer = persistReducer(persistConfig, authReducer);
-//1 uygulamanın tamamını persistent hale getirmek istiyorsak o zaman rootReducer demeliyiz ama bazılarını persistent yapmak istersek o zaman yukarıya sadece persistent yapmak istediğimizi yazmamız gerekir. Şimdi appte persistoru sarmalamamız gerekli
+const persistedReducer = persistReducer(persistConfig, authReducer)
 
 const store = configureStore({
   reducer: {
     auth: persistedReducer,
-    // auth reducerı persistent hale getir.
     stock: stockReducer,
   },
   devTools: process.env.NODE_ENV !== "production",
@@ -39,7 +33,7 @@ const store = configureStore({
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
     }),
-});
-export const persistor = persistStore(store);
+})
+export const persistor = persistStore(store)
 
-export default store;
+export default store
