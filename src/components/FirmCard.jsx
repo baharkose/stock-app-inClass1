@@ -1,17 +1,17 @@
-import * as React from "react"
-import Card from "@mui/material/Card"
-import CardActions from "@mui/material/CardActions"
-import CardContent from "@mui/material/CardContent"
-import CardMedia from "@mui/material/CardMedia"
-import Typography from "@mui/material/Typography"
-import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline"
-import EditIcon from "@mui/icons-material/Edit"
-import { btnStyle } from "../styles/globalStyles"
-import useStockCalls from "../service/useStockCalls"
+import * as React from "react";
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import Typography from "@mui/material/Typography";
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+import EditIcon from "@mui/icons-material/Edit";
+import { btnStyle } from "../styles/globalStyles";
+import useStockCalls from "../service/useStockCalls";
 
-export default function FirmCard({ firm }) {
-  const { address, image, name, phone, _id } = firm
-  const { deleteStock } = useStockCalls()
+export default function FirmCard({ firm, handleOpen , setInfo}) {
+  const { address, image, name, phone, _id } = firm;
+  const { deleteStock } = useStockCalls();
   return (
     <Card
       sx={{
@@ -50,8 +50,11 @@ export default function FirmCard({ firm }) {
           sx={btnStyle}
           onClick={() => deleteStock("firms", _id)}
         />
-        <EditIcon sx={btnStyle} />
+        <EditIcon sx={btnStyle} onClick={()=>{
+          setInfo(firm)
+          handleOpen()}
+          } />
       </CardActions>
     </Card>
-  )
+  );
 }

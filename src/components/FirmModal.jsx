@@ -8,7 +8,7 @@ import { TextField } from "@mui/material";
 import useStockCalls from "../service/useStockCalls";
 
 export default function FirmModal({ open, handleClose, info, setInfo }) {
-  const { postStock } = useStockCalls();
+  const { postStock, putStock } = useStockCalls();
 
   // handle close olunca verileri temizledik ki kullanıcı çıkış yapmadan da tekrar girmek isteğinde veriler temizlenmiş olsun o nedenle info bilgilerini bir üst statee taşıdık.
 
@@ -24,7 +24,13 @@ export default function FirmModal({ open, handleClose, info, setInfo }) {
     console.log("clicked");
     // post işlemi yaptıktan sonra kapatma isteği at, isteği attıktan sonra setInfoyu boşalt.
     // nereye ve neyi
-    postStock("firms", info);
+
+    if (info._id) {
+      postStock("firms", info);
+    } else {
+      putStock("firms", info);
+    }
+
     handleClose();
   };
 
