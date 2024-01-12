@@ -21,7 +21,10 @@ function App() {
   })
   return (
     <>
-    {/* aslında özel verilerin bu şekilde saklanması sakıncalı. http only cookie js erişemiyor sadece sadece protokol erişebilir. */}
+    {/* aslında özel verilerin bu şekilde saklanması sakıncalı. http only cookie js erişemiyor sadece sadece protokol erişebilir.
+    bilgiler aslında local storageda saklanıyor string olarak. Bu işlem aslında çok desteklenen bir işlem değildir.
+    
+    */}
       <ThemeProvider theme={theme}>
         <Provider store={store}>
           {/* 3- persistor ile sarmalama işlemi yaptık. */}
