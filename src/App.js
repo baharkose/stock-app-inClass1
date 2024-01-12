@@ -5,6 +5,7 @@ import { Provider } from "react-redux"
 import store, { persistor } from "./app/store"
 import { ToastContainer } from "react-toastify"
 import { PersistGate } from "redux-persist/integration/react"
+import storage from 'redux-persist/lib/storage/session'
 
 function App() {
   const theme = createTheme({
@@ -19,6 +20,7 @@ function App() {
   })
   return (
     <>
+    {/* aslında özel verilerin bu şekilde saklanması sakıncalı. http only cookie js erişemiyor sadece sadece protokol erişebilir. */}
       <ThemeProvider theme={theme}>
         <Provider store={store}>
           <PersistGate loading={null} persistor={persistor}>
