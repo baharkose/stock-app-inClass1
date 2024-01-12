@@ -1,40 +1,33 @@
-import { useState } from "react";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
-import Modal from "@mui/material/Modal";
-import { modalStyle } from "../styles/globalStyles";
-import { TextField } from "@mui/material";
-import useStockCalls from "../service/useStockCalls";
+// import { useState } from "react"
+import Box from "@mui/material/Box"
+import Button from "@mui/material/Button"
+import TextField from "@mui/material/TextField"
+import Modal from "@mui/material/Modal"
+import { modalStyle } from "../styles/globalStyles"
+import useStockCalls from "../service/useStockCalls"
 
 export default function FirmModal({ open, handleClose, info, setInfo }) {
-  const { postStock, putStock } = useStockCalls();
-
-  // handle close olunca verileri temizledik ki kullanıcı çıkış yapmadan da tekrar girmek isteğinde veriler temizlenmiş olsun o nedenle info bilgilerini bir üst statee taşıdık.
+  const { postStock, putStock } = useStockCalls()
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setInfo({ ...info, [name]: value });
+    // const { name, value } = e.target
+    // setInfo({ ...info, [name]: value })
+    setInfo({ ...info, [e.target.name]: e.target.value })
+  }
 
-    // setInfo({ ...info, [e.target.name]: e.target.value });
-  };
-
+  console.log(info)
   const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("clicked");
-    // post işlemi yaptıktan sonra kapatma isteği at, isteği attıktan sonra setInfoyu boşalt.
-    // nereye ve neyi
-
+    e.preventDefault()
     if (info._id) {
-      postStock("firms", info);
+      putStock("firms", info)
     } else {
-      putStock("firms", info);
+      postStock("firms", info)
     }
 
-    handleClose();
-  };
+    handleClose()
+  }
 
-  console.log(info);
+  console.log(info)
   return (
     <div>
       <Modal
@@ -50,49 +43,51 @@ export default function FirmModal({ open, handleClose, info, setInfo }) {
             onSubmit={handleSubmit}
           >
             <TextField
-              label="Firm Name*"
+              label="Firm Name"
               name="name"
               id="name"
               type="text"
               variant="outlined"
               value={info.name}
               onChange={handleChange}
+              required
             />
             <TextField
-              label="Phone*"
+              label="Phone"
               name="phone"
               id="phone"
-              type="text"
+              type="tel"
               variant="outlined"
               value={info.phone}
               onChange={handleChange}
+              required
             />
             <TextField
-              label="Address*"
+              label="Address"
               name="address"
               id="address"
               type="text"
               variant="outlined"
               value={info.address}
               onChange={handleChange}
+              required
             />
             <TextField
-              label="Image*"
+              label="Image"
               name="image"
               id="image"
               type="url"
-              //   http adresi olacağı için url olması lazım
               variant="outlined"
               value={info.image}
               onChange={handleChange}
+              required
             />
             <Button type="submit" variant="contained" size="large">
-              {" "}
-              Submit
+            {info._id ? "Update Firm" : "Add Firm"}
             </Button>
           </Box>
         </Box>
       </Modal>
     </div>
-  );
+  )
 }
