@@ -1,27 +1,32 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
 import { DataGrid } from "@mui/x-data-grid";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
 
 const columns = [
-  { field: "_id", headerName: "#", width: 90 },
+  { field: "_id", headerName: "#", width: 90, headerAlign: "center" },
   {
     field: "category",
     headerName: "Category",
     // width: 150,
     editable: true,
     flex: 1,
+    headerAlign: "center",
   },
   {
     field: "brand",
     headerName: "Brand",
     flex: 1,
     editable: true,
+    headerAlign: "center",
   },
   {
     field: "name",
     headerName: "Name",
     flex: 1,
     editable: true,
+    headerAlign: "center",
   },
   {
     field: "stock",
@@ -29,12 +34,14 @@ const columns = [
     type: "number",
     flex: 1,
     editable: true,
+    headerAlign: "center",
   },
   {
     field: "actions",
     headerName: "Actions",
     sortable: false,
     flex: 1,
+    headerAlign: "center",
   },
 ];
 
@@ -51,10 +58,15 @@ const rows = [
 ];
 
 export default function ProductTable() {
+  const { products } = useSelector((state) => state.stock);
+  useEffect(() => {
+    getStock();
+  });
   return (
-    <Box sx={{ height: 400, width: "100%" }}>
+    <Box sx={{ width: "100%" }}>
       <DataGrid
         rows={rows}
+        autoHeight
         columns={columns}
         initialState={{
           pagination: {
