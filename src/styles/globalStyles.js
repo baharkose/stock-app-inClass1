@@ -1,7 +1,7 @@
 export const btnStyle = {
   "&:hover": { color: "red", cursor: "pointer" },
 };
-export const ModalStyle = {
+export const modalStyle = {
   position: "absolute",
   top: "50%",
   left: "50%",
