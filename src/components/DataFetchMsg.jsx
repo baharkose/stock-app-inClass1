@@ -1,7 +1,11 @@
 import { Alert, Skeleton, Stack } from "@mui/material";
 
 export const ErrorMsg = () => {
-  return <Alert severity="error">Veriler çekilemedi.</Alert>;
+  return (
+    <Alert severity="error" sx={{ my: 2 }}>
+      Veriler çekilemedi.
+    </Alert>
+  );
 };
 
 export const NoDataMsg = () => {

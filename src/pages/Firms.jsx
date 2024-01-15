@@ -6,11 +6,13 @@ import { useSelector } from "react-redux";
 import { Grid } from "@mui/material";
 import FirmCard from "../components/FirmCard";
 import FirmModal from "../components/FirmModal";
+import TableSkeleton, { ErrorMsg, NoDataMsg } from "../components/DataFetchMsg";
+import ProductTable from "../components/ProductTable";
 
 const Firms = () => {
   // const { getFirms, getSales } = useStockCalls()
   const { getStocks } = useStockCalls();
-  const { firms } = useSelector((state) => state.stock);
+  const { firms, error, loading } = useSelector((state) => state.stock);
   const [info, setInfo] = useState({
     name: "",
     phone: "",
@@ -46,6 +48,13 @@ const Firms = () => {
         {/* açma işlemini aktif hale getir. */}
         New Firm
       </Button>
+
+      {error && <ErrorMsg />}
+      {loading && <TableSkeleton />}
+
+      {!error && !loading && !firms.length && <NoDataMsg />}
+
+      {/* {!error && !loading && firms.length > 0 && <ProductTable />} */}
 
       <FirmModal
         open={open}
