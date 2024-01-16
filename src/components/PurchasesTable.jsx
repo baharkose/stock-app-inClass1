@@ -13,6 +13,20 @@ export default function PurchasesTable() {
 
   const columns = [
     {
+      field: "updatedAt",
+      headerName: "Date",
+      flex: 1.4,
+      headerAlign: "center",
+      sortable: false,
+      align: "center",
+      minWidth: "150px",
+      valueGetter: (params) => {
+        const dateString = params.value;
+        return dateString.slice(0, 10); // Yalnızca yılı alır (örneğin, "2024").
+      }
+     
+    },
+    {
       field: "_id",
       headerName: "Actions",
       flex: 1.4,
@@ -87,7 +101,6 @@ export default function PurchasesTable() {
   return (
     <Box sx={{ width: "100%" }}>
       <DataGrid
-      
         autoHeight
         rows={purchases}
         pageSizeOptions={[5, 10, 15, 20]}

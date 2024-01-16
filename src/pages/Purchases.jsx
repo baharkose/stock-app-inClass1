@@ -5,13 +5,13 @@ import { useEffect } from "react";
 
 const Purchases = () => {
   const { getStocks } = useStockCalls();
-  const { purchases } = useSelector((state) => state.stock);
+  const { purchases, firms } = useSelector((state) => state.stock);
 
-  
   useEffect(() => {
-    getStocks("purchases")
-  }, [])
-  
+    getStocks("purchases");
+    // getStocks("firms")
+  }, []);
+
   return (
     <div>
       <PurchasesTable />
