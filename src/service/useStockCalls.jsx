@@ -62,6 +62,7 @@ const useStockCalls = () => {
           brands?.data.data,
           firms?.data.data,
           // axios kaynaklı verileri data.data şeklinde çekebildik. tarayıcıdaki eklentiden de bakılabilir.
+         
         ])
       );
     } catch (error) {
