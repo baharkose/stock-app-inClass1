@@ -1,16 +1,16 @@
-import { useEffect, useState } from "react"
-import useStockCalls from "../service/useStockCalls"
-import PurchaseModal from "../components/PurchaseModal"
-import PurchaseTable from "../components/PurchaseTable"
-import { Button, Container } from "@mui/material"
-import TableSkeleton, { ErrorMsg, NoDataMsg } from "../components/DataFetchMsg"
-import { useSelector } from "react-redux"
+import { useEffect, useState } from "react";
+import useStockCalls from "../service/useStockCalls";
+import PurchaseModal from "../components/PurchaseModal";
+import PurchaseTable from "../components/PurchaseTable";
+import { Button, Container } from "@mui/material";
+import TableSkeleton, { ErrorMsg, NoDataMsg } from "../components/DataFetchMsg";
+import { useSelector } from "react-redux";
 
 const Purchases = () => {
-  const { getStocks } = useStockCalls()
-  const { error, loading, purchases } = useSelector((state) => state.stock)
+  const { getStocks, getProPurBranFirm } = useStockCalls();
+  const { error, loading, purchases } = useSelector((state) => state.stock);
 
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(false);
 
   const initialState = {
     brandId: "",
@@ -18,21 +18,24 @@ const Purchases = () => {
     productId: "",
     quantity: "",
     price: "",
-  }
-  const [info, setInfo] = useState(initialState)
+  };
+  const [info, setInfo] = useState(initialState);
 
-  const handleOpen = () => setOpen(true)
+  const handleOpen = () => setOpen(true);
   const handleClose = () => {
-    setOpen(false)
-    setInfo(initialState)
-  }
+    setOpen(false);
+    setInfo(initialState);
+  };
 
   useEffect(() => {
-    getStocks("products")
-    getStocks("purchases")
-    getStocks("brands")
-    getStocks("firms")
-  }, []) // eslint-disable-line
+    // promise all bireysel değil de toplu şekilde değerlendirilir.
+    // getStocks("products");
+    // getStocks("purchases");
+    // getStocks("brands");
+    // getStocks("firms");
+
+    getProPurBranFirm();
+  }, []); // eslint-disable-line
 
   return (
     <Container maxWidth="xl">
@@ -54,7 +57,7 @@ const Purchases = () => {
         <PurchaseTable setInfo={setInfo} handleOpen={handleOpen} />
       )}
     </Container>
-  )
-}
+  );
+};
 
-export default Purchases
+export default Purchases;
