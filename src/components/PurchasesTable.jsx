@@ -22,7 +22,7 @@ export default function PurchasesTable() {
       minWidth: "150px",
       valueGetter: (params) => {
         const dateString = params.value;
-        return dateString.slice(0, 10); // Yalnızca yılı alır (örneğin, "2024").
+        return dateString.slice(0, 10);
       }
      
     },
