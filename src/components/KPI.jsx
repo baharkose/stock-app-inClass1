@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 const KPI = () => {
   const { sales, purchases } = useSelector((state) => state.stock);
 
+  
   const totalSales = sales?.reduce((acc, val) => acc + val.amount, 0);
 
   const totalPurchases = purchases?.reduce((acc, val) => acc + val.amount, 0);
@@ -33,7 +34,7 @@ const KPI = () => {
     {
       id: 3,
       title: "profit",
-      amount: "$16900",
+      amount: `$${totalSales - totalPurchases}`,
       icon: <PaymentsIcon sx={{ fontSize: "2rem" }} />,
       bgColor: amber[100],
       color: amber[700],
