@@ -1,62 +1,56 @@
-import { Grid, Container } from "@mui/material"
-import { AreaChart, Card, Title } from "@tremor/react"
-import { useSelector } from "react-redux"
+"use client";
+import { AreaChart, Card, Title } from "@tremor/react";
 
 const chartdata = [
   {
     date: "Jan 22",
-    price: "",
+    SemiAnalysis: 2890,
+    "The Pragmatic Engineer": 2338,
   },
-]
+  {
+    date: "Feb 22",
+    SemiAnalysis: 2756,
+    "The Pragmatic Engineer": 2103,
+  },
+  {
+    date: "Mar 22",
+    SemiAnalysis: 3322,
+    "The Pragmatic Engineer": 2194,
+  },
+  {
+    date: "Apr 22",
+    SemiAnalysis: 3470,
+    "The Pragmatic Engineer": 2108,
+  },
+  {
+    date: "May 22",
+    SemiAnalysis: 3475,
+    "The Pragmatic Engineer": 1812,
+  },
+  {
+    date: "Jun 22",
+    SemiAnalysis: 3129,
+    "The Pragmatic Engineer": 1726,
+  },
+];
 
 const valueFormatter = function (number) {
-  return "$ " + new Intl.NumberFormat("us").format(number).toString()
-}
+  return "$ " + new Intl.NumberFormat("us").format(number).toString();
+};
 
-const Charts = () => {
-  const { sales, purchases } = useSelector((state) => state.stock)
-
-  const salesData = sales?.map((item) => ({
-    date: new Date(item.createdAt).toLocaleDateString("tr-TR"),
-    amount: item.amount,
-  }))
-
-  const purchasesData = purchases?.map((item) => ({
-    date: new Date(item.createdAt).toLocaleDateString("tr-TR"),
-    amount: item.amount,
-  }))
-
+export default function Charts() {
   return (
-    <Container>
-      <Grid container mt={2} spacing={2}>
-        <Grid item xs={12} lg={6}>
-          <Card>
-            <Title>Total Sales (USD)</Title>
-            <AreaChart
-              className=" mt-4"
-              data={salesData}
-              index="date"
-              categories={["amount"]}
-              colors={["indigo"]}
-              valueFormatter={valueFormatter}
-            />
-          </Card>
-        </Grid>
-        <Grid item xs={12} lg={6}>
-          <Card>
-            <Title>Total Purchases (USD)</Title>
-            <AreaChart
-              className="mt-4"
-              data={purchasesData}
-              index="date"
-              categories={["amount"]}
-              colors={["cyan"]}
-              valueFormatter={valueFormatter}
-            />
-          </Card>
-        </Grid>
-      </Grid>
-    </Container>
-  )
+    <Card>
+      <Title>Total Sales (USD)</Title>
+      <AreaChart
+        className="h-72 mt-4"
+        data={chartdata}
+        index="date"
+        yAxisWidth={65}
+        categories={["SemiAnalysis", "The Pragmatic Engineer"]}
+        colors={["indigo", "cyan"]}
+        valueFormatter={valueFormatter}
+      />
+    </Card>
+  );
 }
-export default Charts

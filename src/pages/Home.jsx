@@ -8,6 +8,7 @@ const Home = () => {
 
   useEffect(() => {
     getStocks("sales");
+    getStocks("purchases");
   }, []);
 
   return (
